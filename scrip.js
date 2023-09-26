@@ -18,28 +18,37 @@ document.getElementById('limpiar').addEventListener('click', function() { //capt
     document.getElementById('resultado-clasificacion').innerHTML = "";
 });
 
-document.getElementById('estilo-boton').addEventListener('click', function() {
-    var imginput = document.getElementById('img');
-    if (imginput.files.length > 0) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            var array = reader.result;
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/edb69521-fde2-4272-9d75-9afb93eeb0ac/classify/iterations/clasificacion/image', true);
-            xhr.setRequestHeader('Prediction-Key', '7575c83fb4fe49798d79be9ddeb66d54');
-            xhr.setRequestHeader('Content-Type', 'application/octet-stream');
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    var jsonResponse = JSON.parse(xhr.responseText);
-                    var prediction = jsonResponse.predictions[0];
-                    console.log(reader);
-                    document.getElementById('resultado-clasificacion').innerText = 'Tag: ' + prediction.tagName + ', Probability: ' + prediction.probability;
+// hago llamado a la API utilizando XMLHttpRequest y muestro los resultaos devueltos por esta
+document.getElementById('estilo-boton').addEventListener('click', function() { // capturo el boton para llamar a la API y le agrego un evento click
+    var imgEntrada = document.getElementById('img'); //capturo la imagen que se suba 
+    if (imgEntrada.files.length > 0) { //condiciono para que no se ejecute si esta vacia
+        var reader = new FileReader(); //creo una instancia FileReader para leer el archivo
+        reader.onload = function(e) { //creo una funcion que que se ejecuta cuando el FileReader termine de leer el archivo
+            var array = reader.result; //creo una variable y le asigno el resultado de la lectura del archivo
+            var xhr = new XMLHttpRequest(); // implemento XMLHttpRequest  para realizar la peticion a la API de custom vision
+            xhr.open('POST', 'https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/edb69521-fde2-4272-9d75-9afb93eeb0ac/classify/iterations/modelo/image', true); //usando el metodo POST hago el llamado a la API
+            xhr.setRequestHeader('Prediction-Key', '7575c83fb4fe49798d79be9ddeb66d54'); // implemento la Prediction-Key de mi API 
+            xhr.onreadystatechange = function () { //despues de llamada a la API se crea la funccion para mostrar los resultados devueltos
+                if (xhr.readyState === 4 && xhr.status === 200) { //establesco los parametros para extraccion de los resultados 
+                    var respuestaJson = JSON.parse(xhr.responseText); //guardo los resultados devueltos por la API 
+                    var prediccion = respuestaJson.predictions[0]; //
+                    var prediccion2 = respuestaJson.predictions[1];
+                    var probabilidad = Math.round(prediccion.probability * 100);
+                    document.getElementById('resultado-clasificacion').innerText = 'Clase: ' + prediccion.tagName + ', Probabilidad: ' + probabilidad+ '%';
                 }
             };
+
             xhr.send(array);
         }
-        reader.readAsArrayBuffer(imginput.files[0]);
+        reader.readAsArrayBuffer(imgEntrada.files[0]);
     }
 });
+
+
+
+
+
+
+
 
 

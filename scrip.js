@@ -32,6 +32,7 @@ document.getElementById('estilo-boton').addEventListener('click', function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var jsonResponse = JSON.parse(xhr.responseText);
                     var prediction = jsonResponse.predictions[0];
+                    console.log(reader);
                     document.getElementById('resultado-clasificacion').innerText = 'Tag: ' + prediction.tagName + ', Probability: ' + prediction.probability;
                 }
             };

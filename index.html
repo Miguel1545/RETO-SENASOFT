@@ -4,20 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Retot</title>
+    <title>Reto | SenaSoft</title>
 </head>
 <body>
     <!-- modelo la pagina en la cual se observara los resultados de la llamada a la API -->
     <header>
-        <h1>RETO | VISION</h1>
+        <nav class="contenedor-logo">
+            <nav class="padre-img-logo">
+                <img class="logo" src="/img/Sena_Colombia_logo.svg.png" alt="">
+            </nav>
+            
+        </nav>
+        <h1 class="titulo">RETO | VISION</h1>
+        <nav class="senasoft-logo">
+            <img class="senasoft" src="#" alt="">
+        </nav>
     </header>
-
-
     <section class="clasificacion">
         <section class="lado-izquierdo">
             <nav class="lado-izquierdo-1">
-                <h2>CLASIFICACION</h2>
+                <h2 class="titulo-clasificacion">CLASIFICACION</h2>
                 <input type="file" id="img">
+                <input type="search" id="url-imagen" placeholder="URL de la imagen">
             </nav>
 
             <nav id="mostrar-img">
@@ -30,12 +38,11 @@
                 <p id="resultado-clasificacion"></p>
             </nav>
 
-            <nav class="boton">
-                <button id="estilo-boton">enviar</button>
-            </nav>
-            <nav>
+            <nav class="botones">
+                <button id="estilo-boton">Enviar</button> 
                 <button id="limpiar">Limpiar</button>
             </nav>
+
         </section>
     </section>
 

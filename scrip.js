@@ -12,43 +12,84 @@ document.getElementById('img').addEventListener('change', function() { //capturo
 
 // creo una funcion la cual le da un evento click a un boton, el cual eliminara todos los datos obtenidos de la API y la imagen cargada
 document.getElementById('limpiar').addEventListener('click', function() { //capturo y creo el evento click
-    var imgContainer = document.getElementById('mostrar-img'); //capturo el contenedor de la imagen 
-    imgContainer.removeChild(imgContainer.firstChild); //elimino el nodo hijo que tenia el contenedor de la imagen
     document.getElementById('img').value = ''; //restablesco el valor del imput en limpio
     document.getElementById('resultado-clasificacion').innerHTML = "";
+    document.getElementById('url-imagen').value = ""
+    var imgContainer = document.getElementById('mostrar-img'); //capturo el contenedor de la imagen 
+    while (imgContainer.firstChild) {
+        imgContainer.removeChild(imgContainer.firstChild); 
+    } // verifico que el contenedor de la imagen tenga algun contenido y si es asi elimino el nodo hijo que tenia el contenedor de la imagen
+    document.getElementById('results').value = "";
 });
 
 // hago llamado a la API utilizando XMLHttpRequest y muestro los resultaos devueltos por esta
 document.getElementById('estilo-boton').addEventListener('click', function() { // capturo el boton para llamar a la API y le agrego un evento click
+
     var imgEntrada = document.getElementById('img'); //capturo la imagen que se suba 
-    if (imgEntrada.files.length > 0) { //condiciono para que no se ejecute si esta vacia
+    var urlimagen = document.getElementById('url-imagen').value;
+    if (imgEntrada.files.length > 0 || urlimagen) { //condiciono para que no se ejecute si esta vacia
         var reader = new FileReader(); //creo una instancia FileReader para leer el archivo
         reader.onload = function(e) { //creo una funcion que que se ejecuta cuando el FileReader termine de leer el archivo
-            var array = reader.result; //creo una variable y le asigno el resultado de la lectura del archivo
-            var xhr = new XMLHttpRequest(); // implemento XMLHttpRequest  para realizar la peticion a la API de custom vision
-            xhr.open('POST', 'https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/edb69521-fde2-4272-9d75-9afb93eeb0ac/classify/iterations/modelo/image', true); //usando el metodo POST hago el llamado a la API
-            xhr.setRequestHeader('Prediction-Key', '7575c83fb4fe49798d79be9ddeb66d54'); // implemento la Prediction-Key de mi API 
-            xhr.onreadystatechange = function () { //despues de llamada a la API se crea la funccion para mostrar los resultados devueltos
-                if (xhr.readyState === 4 && xhr.status === 200) { //establesco los parametros para extraccion de los resultados 
-                    var respuestaJson = JSON.parse(xhr.responseText); //guardo los resultados devueltos por la API 
-                    var prediccion = respuestaJson.predictions[0]; //
-                    var prediccion2 = respuestaJson.predictions[1];
-                    var probabilidad = Math.round(prediccion.probability * 100);
-                    document.getElementById('resultado-clasificacion').innerText = 'Clase: ' + prediccion.tagName + ', Probabilidad: ' + probabilidad+ '%';
+            var lecturaResul = reader.result; //creo una variable y le asigno el resultado de la lectura del archivo
+            var api = new XMLHttpRequest(); // implemento XMLHttpRequest  para realizar la peticion a la API de custom vision
+            api.open('POST', 'https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/edb69521-fde2-4272-9d75-9afb93eeb0ac/classify/iterations/modelo/image', true); //usando el metodo POST hago el llamado a la API
+            api.setRequestHeader('Prediction-Key', '7575c83fb4fe49798d79be9ddeb66d54'); // implemento la Prediction-Key de mi API 
+            api.onreadystatechange = function () { //despues de llamada a la API se crea la funccion para mostrar los resultados devueltos
+                if (api.readyState === 4 && api.status === 200) { //verificacion si lia solicitud fue exitosa 
+                    var respuestaJson = JSON.parse(api.responseText); //guardo los resultados devueltos por la API 
+                    var prediccion = respuestaJson.predictions[0]; // Extraigo las predicciones de la respuesta
+                    var probabilidad = Math.round(prediccion.probability * 100); //redondeo la probabilidad al entero mas cercano
+                    if(probabilidad <= 80){
+                        alert("conflicto de deteccion") //si la probabilidad es menor o igual a 60 no detectara nada
+                    }else{
+                        document.getElementById('resultado-clasificacion').innerText = 'Clase: ' + prediccion.tagName + ', Probabilidad: ' + probabilidad+ '%'; //muestro los resultados en el contenedor con id resultado-clasificacion que es una etiqueta <p>
+                    }
+                    xhrTraduccion.send(JSON.stringify([{ 'Text': prediccion.tagName }]));
                 }
             };
-
-            xhr.send(array);
+            api.send(lecturaResul); // Envio la solicitud a la API con los datos de la imagen
         }
-        reader.readAsArrayBuffer(imgEntrada.files[0]);
+        
+        if (urlimagen) {
+            fetch(urlimagen)
+                .then(response => response.blob())
+                .then(blob => {
+                    var objectURL = URL.createObjectURL(blob);
+                    var imgElement = document.createElement('img');
+                    imgElement.className = 'imagen';
+                    imgElement.src = objectURL;
+                    document.getElementById('mostrar-img').appendChild(imgElement);
+                    reader.readAsArrayBuffer(blob);
+                })
+                .catch(error => console.error(error));
+        } else {
+            reader.readAsArrayBuffer(imgEntrada.files[0]);//Inicio la lectura del archivo de la imagen como un ArrayBuffer
+        }
+
+
+        // Creo una nueva solicitud HTTP para hacer una petición a la API de traducción
+        var xhrTraduccion = new XMLHttpRequest();
+        xhrTraduccion.open('POST', 'https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=en,fr,it,ko,ru', true);
+        xhrTraduccion.setRequestHeader('Ocp-Apim-Subscription-Key', '4cfa4d9c8be143b98089561423c86b7d');
+        xhrTraduccion.setRequestHeader('Ocp-Apim-Subscription-Region', 'eastus');
+        xhrTraduccion.setRequestHeader('Content-Type', 'application/json');
+        xhrTraduccion.onreadystatechange = function () {
+            
+            if (xhrTraduccion.readyState === 4 && xhrTraduccion.status === 200) { // Verifico si la solicitud se completó y fue exitosa
+                
+                var respuestaTraduccion = JSON.parse(xhrTraduccion.responseText); // Parseo la respuesta de la API a un objeto JSON
+                var resultadosTraducciones = ''; // Creo una variable para almacenar los resultados de las traducciones
+                for (var i = 0; i < respuestaTraduccion.length; i++) { // recorro el arreglo de cada traducción y agrego los resultados a la variable
+                    for (var j = 0; j < respuestaTraduccion[i].translations.length; j++) {
+                        resultadosTraducciones += respuestaTraduccion[i].translations[j].to + ': ' + respuestaTraduccion[i].translations[j].text + '\n';
+                    }  
+                }
+                document.getElementById('results').value = resultadosTraducciones; // Muestro los resultados en el área de texto con id 'results'
+                    
+            }
+        };
+       
     }
 });
-
-
-
-
-
-
-
 
 

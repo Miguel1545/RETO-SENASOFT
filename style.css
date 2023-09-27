@@ -19,7 +19,7 @@ body {
 }
 header {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     width: 90%;
     height: 10vh;
@@ -28,6 +28,30 @@ header {
     margin-bottom: 20px;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
     background: linear-gradient(rgba(107, 100, 109, 0.719), rgb(145, 133, 138));
+}
+.contenedor-logo {
+    width: 30%;
+    height: 7vh;
+}
+.padre-img-logo {
+    width: 15%;
+    border-radius: 50%;
+    
+}
+.titulo {
+    width: 30%;
+}
+.logo {
+    width: 100%;
+    height: 100%;
+}
+.senasoft-logo{
+    width: 30%;
+    height: 7vh;
+}
+.senasoft {
+    width: 100%;
+    height: 100%;
 }
 .clasificacion {
     display: flex;
@@ -46,22 +70,26 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+ 
+}
+.titulo-clasificacion {
+    margin-bottom: 25%;
 }
 #mostrar-img {
     /* background-color: aquamarine; */
     width: 50%;
     height: 35vh;
-    transition: 1s;
+   
     /* background-color: aqua; */
 }
 
 .lado-izquierdo {
-    width: 50%;
+    width: 65%;
     display: flex;
-
+    justify-content: space-evenly;
 }
 .lado-derecho {
-    width: 50%;
+    width: 35%;
     /* background-color: aqua; */
     display: flex;
     justify-content: center;
@@ -81,16 +109,24 @@ header {
 }
 #estilo-boton {
     height: 5vh;
-    width: 80px;
-    margin-top: 50px;
+    width: 40%;
     border-radius: 10px;
+}
+#estilo-boton:hover {
+    background-color: #5cb421;
+    transition: 0.6s;
+    box-shadow: 0 4px 16px rgb(73, 77, 78);
 }
 #limpiar {
     height: 5vh;
-    width: 80px;
-    margin-top: 15px;
-    background-color: rgb(197, 114, 114);
+    width: 40%;
+    
     border-radius:10px;
+}
+#limpiar:hover {
+    background-color: #e74040;
+    transition: 0.4s;
+    box-shadow: 0 4px 16px rgb(73, 77, 78);
 }
 .traducciones {
     width: 90%;
@@ -109,4 +145,23 @@ header {
 }
 .padre-resultado {
     height: 10vh;
+}
+.botones {
+    margin-top: 100px;
+    display: flex;
+    height: 5vh;
+    width: 50%;
+    justify-content: space-evenly;
+
+}
+#url-imagen {
+    margin-top: 10%;
+    opacity: 90%;
+    padding: 0 4px;
+    height: 4vh;
+    width: 100%;
+}
+#img{
+    opacity: 90%;
+    height: 5vh;
 }

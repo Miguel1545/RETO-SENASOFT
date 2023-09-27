@@ -9,21 +9,29 @@
 <body>
     <!-- modelo la pagina en la cual se observara los resultados de la llamada a la API -->
     <header>
+        <nav class="senasoft-logo">
+            <img class="senasoft" src="/img/Logo (4).svg" alt="">
+        </nav>
+
+        <h1 class="titulo">RETO | VISION</h1>
+
         <nav class="contenedor-logo">
             <nav class="padre-img-logo">
                 <img class="logo" src="/img/Sena_Colombia_logo.svg.png" alt="">
             </nav>
             
         </nav>
-        <h1 class="titulo">RETO | VISION</h1>
-        <nav class="senasoft-logo">
-            <img class="senasoft" src="#" alt="">
-        </nav>
+        
+
     </header>
+
+    
     <section class="clasificacion">
+        <h2>CLASIFICACION</h2>
+
         <section class="lado-izquierdo">
             <nav class="lado-izquierdo-1">
-                <h2 class="titulo-clasificacion">CLASIFICACION</h2>
+                
                 <input type="file" id="img">
                 <input type="search" id="url-imagen" placeholder="URL de la imagen">
             </nav>
@@ -39,20 +47,90 @@
             </nav>
 
             <nav class="botones">
-                <button id="estilo-boton">Enviar</button> 
+                <button id="boton-enviar">Enviar</button> 
                 <button id="limpiar">Limpiar</button>
             </nav>
 
-        </section>
+        </section> 
     </section>
+
 
 
     <section class="traducciones">
-        <h2>TRADUCCIONES</h2>
-        <textarea id="results" rows="4" cols="50">
-           
-        </textarea>
+        <nav class="izquierda-traduccion">
+            <h2>TRADUCCIONES</h2>
+            <textarea id="results">
+               
+            </textarea>
+        </nav>
+
+        <nav class="derecha-traduccion">  
+            <h2>AUDIO</h2>
+
+            <section class="contenedor-boton-play">
+                <nav class="padre-play">
+                    <nav class="logo-play">
+                        <img class="img-play" src="/img/punta-de-flecha-del-boton-de-reproduccion.png" alt="">
+                        <button id="boton-play">Play</button>
+                    </nav>
+                </nav>
+            </section>
+            <section id="salida-audio">
+                <audio id="audio" src="" controls></audio>
+            </section>
+        </nav>
+
     </section>
+
+    <section class="detector-objetos">
+        <h1 class="titulo-objetos">DETECTOR DE OBJETOS</h1>
+        <section class="contenido-objetos">
+            
+            <nav class="contenedor">
+                <nav class="padre-img-objeto-1">
+ 
+                </nav>
+                <input type="file" id="img-1">
+                <input type="search" id="url-imagen-1" placeholder="URL de la imagen"> <br>
+                <button id="enviar-objeto-1">Enviar</button>
+                <button id="eliminar-objeto-1">Eliminar</button>
+                <nav>
+                    <p id="resultado-objeto-1"></p>
+                </nav>
+            </nav>
+
+            <nav class="contenedor">
+                <nav class="padre-img-objeto-2">
+
+                </nav>
+                <input type="file" id="img-2">
+                <input type="search" id="url-imagen-2" placeholder="URL de la imagen"> <br>
+                <button id="enviar-objeto-2">Enviar</button>
+                <button id="eliminar-objeto-2">Eliminar</button>
+                <nav>
+                    <p id="resultado-objeto-2"></p>
+                </nav>
+            </nav>
+
+            <nav class="contenedor">
+                <nav class="padre-img-objeto-3">
+
+                </nav>
+                <input type="file" id="img-3">
+                <input type="search" id="url-imagen-3" placeholder="URL de la imagen"> <br>
+                <button id="enviar-objeto-3">Enviar</button>
+                <button id="eliminar-objeto-3">Eliminar</button>
+                <nav>
+                    <p id="resultado-objeto-3"></p>
+                </nav>
+            </nav>
+        </section>
+        
+    </section>
+
+
+
     <script src="./scrip.js"></script>
+    <script src="/js.js"></script>
 </body>
 </html>

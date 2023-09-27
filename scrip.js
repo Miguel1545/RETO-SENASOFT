@@ -23,7 +23,7 @@ document.getElementById('limpiar').addEventListener('click', function() { //capt
 });
 
 // hago llamado a la API utilizando XMLHttpRequest y muestro los resultaos devueltos por esta
-document.getElementById('estilo-boton').addEventListener('click', function() { // capturo el boton para llamar a la API y le agrego un evento click
+document.getElementById('boton-enviar').addEventListener('click', function() { // capturo el boton para llamar a la API y le agrego un evento click
 
     var imgEntrada = document.getElementById('img'); //capturo la imagen que se suba 
     var urlimagen = document.getElementById('url-imagen').value;
@@ -39,7 +39,7 @@ document.getElementById('estilo-boton').addEventListener('click', function() { /
                     var respuestaJson = JSON.parse(api.responseText); //guardo los resultados devueltos por la API 
                     var prediccion = respuestaJson.predictions[0]; // Extraigo las predicciones de la respuesta
                     var probabilidad = Math.round(prediccion.probability * 100); //redondeo la probabilidad al entero mas cercano
-                    if(probabilidad <= 80){
+                    if(probabilidad <= 70){
                         alert("conflicto de deteccion") //si la probabilidad es menor o igual a 60 no detectara nada
                     }else{
                         document.getElementById('resultado-clasificacion').innerText = 'Clase: ' + prediccion.tagName + ', Probabilidad: ' + probabilidad+ '%'; //muestro los resultados en el contenedor con id resultado-clasificacion que es una etiqueta <p>
@@ -69,7 +69,7 @@ document.getElementById('estilo-boton').addEventListener('click', function() { /
 
         // Creo una nueva solicitud HTTP para hacer una petición a la API de traducción
         var xhrTraduccion = new XMLHttpRequest();
-        xhrTraduccion.open('POST', 'https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=en,fr,it,ko,ru', true);
+        xhrTraduccion.open('POST', 'https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=en,fr,it,pt,ca', true);
         xhrTraduccion.setRequestHeader('Ocp-Apim-Subscription-Key', '4cfa4d9c8be143b98089561423c86b7d');
         xhrTraduccion.setRequestHeader('Ocp-Apim-Subscription-Region', 'eastus');
         xhrTraduccion.setRequestHeader('Content-Type', 'application/json');

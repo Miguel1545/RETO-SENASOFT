@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 283.14 59.5">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5 {
+        stroke-width: 0px;
+      }
+
+      .cls-6 {
+        fill: #009640;
+        font-family: Bahnschrift-Bold, Bahnschrift;
+        font-variation-settings: 'wght' 700, 'wdth' 100;
+        font-weight: 700;
+      }
+
+      .cls-6, .cls-7 {
+        font-size: 48px;
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-5);
+      }
+
+      .cls-8 {
+        letter-spacing: 0em;
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-4 {
+        fill: url(#linear-gradient-3);
+      }
+
+      .cls-7 {
+        fill: #06619c;
+        font-family: MyriadConceptRoman-Regular, 'Myriad Variable Concept';
+        font-variation-settings: 'wght' 400, 'wdth' 100;
+      }
+
+      .cls-9 {
+        letter-spacing: 0em;
+      }
+
+      .cls-10 {
+        letter-spacing: 0em;
+      }
+
+      .cls-11 {
+        letter-spacing: .01em;
+      }
+
+      .cls-5 {
+        fill: url(#linear-gradient-4);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="3.5" y1="52.84" x2="27.6" y2="20.36" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4699d4"/>
+      <stop offset=".19" stop-color="#3f90ca"/>
+      <stop offset=".51" stop-color="#2c77b2"/>
+      <stop offset=".91" stop-color="#0d508a"/>
+      <stop offset="1" stop-color="#064780"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="37.29" y1="58.72" x2="37.29" y2=".27" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#57c3e9"/>
+      <stop offset=".35" stop-color="#4699d4"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="15.56" y1="40.02" x2="35.56" y2="51.32" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#106db6"/>
+      <stop offset="1" stop-color="#1c3c6d"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-4" x1="63.96" y1="29.28" x2="65.15" y2="29.28" xlink:href="#linear-gradient-3"/>
+    <linearGradient id="linear-gradient-5" x1="170.07" y1="28.28" x2="172.25" y2="28.28" gradientTransform="translate(633.7 188.97) rotate(-157.13) scale(2.71 -.83)" xlink:href="#linear-gradient-3"/>
+  </defs>
+  <g>
+    <path class="cls-1" d="m20.62,10.22c-2.58,2.15-5.56,7.01-5.56,7.01L.98,45.17c-2.95,5.85,1.13,12.73,7.58,13.05,4.5.22,8.57-2.49,10.62-6.5l16.12-31.5s-12.1-12.15-14.68-10Z"/>
+    <path class="cls-3" d="m15.06,17.23c1.88-3.68,5.83-2.91,7.07-.44l7.43,14.5,2.68,5.22,4.19,8.17c2.42,4.65.62,10.38-4.03,12.81-1.45.75-3,1.1-4.53,1.08h22.02c1.53.02,3.08-.32,4.53-1.08,4.65-2.42,6.45-8.16,4.03-12.81L38.16,5.12c-3.53-6.82-13.29-6.82-16.83,0l-6.28,12.12Z"/>
+    <path class="cls-4" d="m32.24,36.51H14.8c-1.68,0-2.78,1.78-2.03,3.28l6.82,13.67c1.67,3.2,4.91,5.05,8.28,5.11,1.53.02,3.08-.32,4.53-1.08,4.65-2.42,6.45-8.16,4.03-12.81l-4.19-8.17Z"/>
+  </g>
+  <text class="cls-6" transform="translate(67.59 46.52)"><tspan class="cls-9" x="0" y="0">S</tspan><tspan x="29.09" y="0">E</tspan><tspan class="cls-9" x="57.77" y="0">N</tspan><tspan x="90.91" y="0">A</tspan></text>
+  <rect class="cls-5" x="63.96" y=".33" width="1.19" height="57.9"/>
+  <polygon class="cls-2" points="192.6 46.99 193.54 47.61 202.6 13.82 201.65 13.2 192.6 46.99"/>
+  <text class="cls-7" transform="translate(202.41 46.52)"><tspan class="cls-8" x="0" y="0">S</tspan><tspan class="cls-10" x="23.95" y="0">o</tspan><tspan class="cls-11" x="50.3" y="0">f</tspan><tspan x="64.85" y="0">t</tspan></text>
+</svg>

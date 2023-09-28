@@ -39,7 +39,7 @@ document.getElementById('boton-enviar').addEventListener('click', function() { /
                     var respuestaJson = JSON.parse(api.responseText); //guardo los resultados devueltos por la API 
                     var prediccion = respuestaJson.predictions[0]; // Extraigo las predicciones de la respuesta
                     var probabilidad = Math.round(prediccion.probability * 100); //redondeo la probabilidad al entero mas cercano
-                    if(probabilidad <= 70){
+                    if (probabilidad <= 70){
                         alert("conflicto de deteccion") //si la probabilidad es menor o igual a 60 no detectara nada
                     }else{
                         document.getElementById('resultado-clasificacion').innerText = 'Clase: ' + prediccion.tagName + ', Probabilidad: ' + probabilidad+ '%'; //muestro los resultados en el contenedor con id resultado-clasificacion que es una etiqueta <p>

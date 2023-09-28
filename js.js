@@ -1,39 +1,140 @@
-document.getElementById('img-1').addEventListener('change', function() { //capturo y creo un evento click
-    var reader = new FileReader(); //creo una instancia FileReader para leer el archivo
-    reader.onload = function(e) { //creo una funcion que que se ejecuta cuando el FileReader termine de leer el archivo
-        var img = document.createElement('img'); //creo una etiqueta img
-        img.className = ('imagen') //le doy la clase 'imagen' a la etiqueta img creada
-        img.src = e.target.result; //establesco el valor src de la imagnen con el resultado de la lectura del archivo de la instancia FileReader
-        document.getElementById('padre-img-objeto-1').appendChild(img); //capturo el contenedor de la imagen y le agrego el contenido de la variable img, que seria la imagen
+
+document.getElementById('img-1').addEventListener('change', function() {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        var img = document.createElement('img');
+        img.className = ('imagen');
+        img.src = e.target.result;
+        document.getElementById('padre-img-objeto-1').appendChild(img);
     }
-    reader.readAsDataURL(this.files[0]); //se inicializa la lectura del archivo subido 
+    reader.readAsDataURL(this.files[0]);
 });
 
-document.getElementById('enviar-objeto-1').addEventListener('click', function() { // capturo el boton para llamar a la API y le agrego un evento click
 
-    var imgEntrada = document.getElementById('img-1'); //capturo la imagen que se suba 
+document.getElementById('eliminar-objeto-1').addEventListener('click', function() {
+    document.getElementById('img-1').value = '';
+    document.getElementById('resultado-objeto-1').innerHTML = "";
+    document.getElementById('url-imagen-1').value = ""
+    var imgContainer = document.getElementById('padre-img-objeto-1');
+    while (imgContainer.firstChild) {
+        imgContainer.removeChild(imgContainer.firstChild); 
+    }
+});
+
+
+
+document.getElementById('enviar-objeto-1').addEventListener('click', function() {
+
+    var imgEntrada = document.getElementById('img-1');
     var urlimagen = document.getElementById('url-imagen-1').value;
-    if (imgEntrada.files.length > 0 || urlimagen) { //condiciono para que no se ejecute si esta vacia
-        var reader = new FileReader(); //creo una instancia FileReader para leer el archivo
-        reader.onload = function(e) { //creo una funcion que que se ejecuta cuando el FileReader termine de leer el archivo
-            var lecturaResul = reader.result; //creo una variable y le asigno el resultado de la lectura del archivo
-            var api = new XMLHttpRequest(); // implemento XMLHttpRequest  para realizar la peticion a la API de custom vision
-            api.open('POST', 'https://retosenasoft-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/9b358784-4372-4254-97e2-7c6e765404cc/detect/iterations/Deteccion-objetos/image', true); //usando el metodo POST hago el llamado a la API
-            api.setRequestHeader('Prediction-Key', 'a1e89fadf90c4d92bffbba3f0d533b78'); // implemento la Prediction-Key de mi API 
-            api.onreadystatechange = function () { //despues de llamada a la API se crea la funccion para mostrar los resultados devueltos
-                if (api.readyState === 4 && api.status === 200) { //verificacion si lia solicitud fue exitosa 
-                    var respuestaJson = JSON.parse(api.responseText); //guardo los resultados devueltos por la API 
-                    var prediccion = respuestaJson.predictions[0]; // Extraigo las predicciones de la respuesta
-                    var probabilidad = Math.round(prediccion.probability * 100); //redondeo la probabilidad al entero mas cercano
-                    if(probabilidad <= 70){
-                        alert("conflicto de deteccion") //si la probabilidad es menor o igual a 60 no detectara nada
-                    }else{
-                        document.getElementById('resultado-objeto-1').innerText = 'Clase: ' + prediccion.tagName + ', Probabilidad: ' + probabilidad+ '%'; //muestro los resultados en el contenedor con id resultado-clasificacion que es una etiqueta <p>
+    if (imgEntrada.files.length > 0 || urlimagen) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var lecturaResul = reader.result;
+            var api = new XMLHttpRequest();
+            api.open('POST', 'https://retosenasoft-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/9b358784-4372-4254-97e2-7c6e765404cc/detect/iterations/Deteccion-objetos/image', true);
+            api.setRequestHeader('Prediction-Key', 'a1e89fadf90c4d92bffbba3f0d533b78');
+            api.onreadystatechange = function () {
+                if (api.readyState === 4 && api.status === 200) {
+                    var respuestaJson = JSON.parse(api.responseText);
+                    var maxPrediccion = respuestaJson.predictions[0];
+                    for (var i = 1; i < respuestaJson.predictions.length; i++) {
+                        if (respuestaJson.predictions[i].probability > maxPrediccion.probability) {
+                            maxPrediccion = respuestaJson.predictions[i];
+                        }
                     }
-                    xhrTraduccion.send(JSON.stringify([{ 'Text': prediccion.tagName }]));
+                    var probabilidad = Math.round(maxPrediccion.probability * 100);
+                    if (probabilidad > 70) {
+                        document.getElementById('resultado-objeto-1').innerText = 'Clase: ' + maxPrediccion.tagName + ', Probabilidad: ' + probabilidad+ '%';
+                    }
                 }
-            };
-            api.send(lecturaResul); // Envio la solicitud a la API con los datos de la imagen
+                console.log(respuestaJson)
+            }
+            
+            api.send(lecturaResul);
         }
+
+        if (urlimagen) {
+            fetch(urlimagen)
+                .then(response => response.blob())
+                .then(blob => {
+                    var objectURL = URL.createObjectURL(blob);
+                    var imgElement = document.createElement('img');
+                    imgElement.className = 'imagen';
+                    imgElement.src = objectURL;
+                    document.getElementById('padre-img-objeto-1').appendChild(imgElement);
+                    reader.readAsArrayBuffer(blob);
+                })
+                .catch(error => console.error(error));
+        } else {
+            reader.readAsArrayBuffer(imgEntrada.files[0]);//Inicio la lectura del archivo de la imagen como un ArrayBuffer
+        }
+       
+    }
+});
+
+
+document.getElementById('img-2').addEventListener('change', function() {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        var img = document.createElement('img');
+        img.className = 'imagen';
+        img.src = e.target.result;
+        document.getElementById('padre-img-objeto-2').appendChild(img);
+    }
+    reader.readAsDataURL(this.files[0]);
+});
+
+document.getElementById('eliminar-objeto-2').addEventListener('click', function() {
+    document.getElementById('img-2').value = '';
+    document.getElementById('resultado-objeto-2').innerHTML = "";
+    document.getElementById('url-imagen-2').value = ""
+    var imgContainer = document.getElementById('padre-img-objeto-2');
+    while (imgContainer.firstChild) {
+        imgContainer.removeChild(imgContainer.firstChild); 
+    }
+});
+
+document.getElementById('enviar-objeto-2').addEventListener('click', function() {
+    var imgEntrada = document.getElementById('img-2');
+    var urlimagen = document.getElementById('url-imagen-2').value;
+    if (imgEntrada.files.length > 0 || urlimagen) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var lecturaResul = reader.result;
+            var api = new XMLHttpRequest();
+            api.open('POST', 'https://retosenasoft-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/9b358784-4372-4254-97e2-7c6e765404cc/detect/iterations/Deteccion-objetos/image', true);
+            api.setRequestHeader('Prediction-Key', 'a1e89fadf90c4d92bffbba3f0d533b78');
+            api.setRequestHeader('Content-Type', 'application/octet-stream');
+            api.onreadystatechange = function () {
+                if (api.readyState === 4 && api.status === 200) {
+                    var respuestaJson = JSON.parse(api.responseText);
+                    var prediccion = respuestaJson.predictions[0];
+                    var probabilidad = Math.round(prediccion.probability * 100);
+                    if (probabilidad > 70) {
+                        document.getElementById('resultado-objeto-2').innerText = 'Clase: ' + prediccion.tagName + ', Probabilidad: ' + probabilidad+ '%';
+                    }
+                }
+                console.log(respuestaJson)
+            }
+            api.send(lecturaResul);
+        }
+
+        if (urlimagen) {
+            fetch(urlimagen)
+                .then(response => response.blob())
+                .then(blob => {
+                    var objectURL = URL.createObjectURL(blob);
+                    var imgElement = document.createElement('img');
+                    imgElement.className = 'imagen';
+                    imgElement.src = objectURL;
+                    document.getElementById('padre-img-objeto-2').appendChild(imgElement);
+                    reader.readAsArrayBuffer(blob);
+                })
+                .catch(error => console.error(error));
+        } else {
+            reader.readAsArrayBuffer(imgEntrada.files[0]);//Inicio la lectura del archivo de la imagen como un ArrayBuffer
+        }
+       
     }
 });

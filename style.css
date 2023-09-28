@@ -24,7 +24,7 @@ header {
     align-items: center;
     width: 90%;
     height: 10vh;
-    background-color: #ffffff; 
+    background-color: #c5bebe; 
     padding: 20px;
     margin-bottom: 20px;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
@@ -67,7 +67,7 @@ header {
     display: flex;
     width: 90%;
     height: 40vh;
-    background-color: rgb(255, 255, 255); 
+    background-color: #c5bebe; 
     padding: 20px;
     margin-bottom: 20px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
@@ -135,7 +135,7 @@ header {
     width: 90%;
     height: 30vh;
     text-align: center;
-    background-color: #ffffff;
+    background-color: #c5bebe;
     padding: 20px;
     display: flex;
     justify-content: space-evenly;
@@ -223,7 +223,7 @@ header {
 .detector-objetos {
     width: 90%;
     height: 90vh;
-    background-color: #ffffff;
+    background-color: #c5bebe;
     text-align: center;
 }
 .contenido-objetos {
@@ -296,11 +296,22 @@ header {
 .detector-rostros {
     width: 90%;
     height: 90vh;
-    background-color: #ffffff;
+    background-color: #c5bebe;
     text-align: center;
     margin-top: 20px;
 
 }
 .titulo-rostros {
     display: block;
+}
+footer {
+    width: 90%;
+    height: 10vh;
+    background-color: #c5bebe;
+    text-align: center;
+    margin-top: 20px;
+
+}
+.pie-pag {
+    margin-top: 20px;
 }

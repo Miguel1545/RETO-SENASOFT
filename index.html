@@ -67,17 +67,13 @@
         <nav class="derecha-traduccion">  
             <h2>AUDIO</h2>
 
-            <section class="contenedor-boton-play">
-                <nav class="padre-play">
-                    <nav class="logo-play">
-                        <img class="img-play" src="/img/punta-de-flecha-del-boton-de-reproduccion.png" alt="">
-                        <button id="boton-play">Play</button>
-                    </nav>
-                </nav>
-            </section>
             <section id="salida-audio">
+                <nav>
+                    <input type="text" id="entrada-texto" placeholder="texto a voz"> <input id="enviar-texto" type="button" value="enviar">
+                </nav>
                 <audio id="audio" src="" controls></audio>
             </section>
+
         </nav>
 
     </section>
@@ -92,8 +88,10 @@
                 </nav>
                 <input type="file" id="img-1">
                 <input type="search" id="url-imagen-1" placeholder="URL de la imagen"> <br>
-                <button id="enviar-objeto-1">Enviar</button>
-                <button id="eliminar-objeto-1">Eliminar</button>
+                <nav class="botones-objetos">
+                    <button id="enviar-objeto-1">Enviar</button>
+                    <button id="eliminar-objeto-1">Eliminar</button>
+                </nav>
                 <nav>
                     <p id="resultado-objeto-1"></p>
                 </nav>
@@ -105,8 +103,11 @@
                 </nav>
                 <input type="file" id="img-2">
                 <input type="search" id="url-imagen-2" placeholder="URL de la imagen"> <br>
-                <button id="enviar-objeto-2">Enviar</button>
-                <button id="eliminar-objeto-2">Eliminar</button>
+                <nav class="botones-objetos">
+                    <button id="enviar-objeto-2">Enviar</button>
+                    <button id="eliminar-objeto-2">Eliminar</button>
+                </nav>
+
                 <nav>
                     <p id="resultado-objeto-2"></p>
                 </nav>
@@ -118,8 +119,11 @@
                 </nav>
                 <input type="file" id="img-3">
                 <input type="search" id="url-imagen-3" placeholder="URL de la imagen"> <br>
-                <button id="enviar-objeto-3">Enviar</button>
-                <button id="eliminar-objeto-3">Eliminar</button>
+                <nav class="botones-objetos">
+                    <button id="enviar-objeto-3">Enviar</button>
+                    <button id="eliminar-objeto-3">Eliminar</button>
+                </nav>
+
                 <nav>
                     <p id="resultado-objeto-3"></p>
                 </nav>
@@ -128,9 +132,64 @@
         
     </section>
 
+    <section class="detector-rostros">
+        <h1 class="titulo-objetos">DETECTOR DE ROSTROS</h1>
+
+        <section class="contenido-objetos">
+
+            <nav class="rostros-contenedor">
+                <nav id="padre-img-rostro-1">
+                    <canvas id="canvas" class="imagen"></canvas>
+                </nav>
+                <input type="file" id="img-rostro-1">
+                <input type="search" id="url-imagen-1-rostro" placeholder="URL de la imagen"> <br>
+                <nav class="botones-objetos">
+                    <button id="enviar-rostro-1">Enviar</button>
+                    <button id="eliminar-rostro-1">Eliminar</button>
+                </nav>
+                <nav>
+                    <p id="resultado-rostro-1"></p>
+                </nav>
+            </nav>
+
+            <nav class="rostros-contenedor">
+                <nav id="padre-img-objeto-2">
+                    <canvas id="canvas-2" class="imagen"></canvas>
+                </nav>
+                <input type="file" id="img-rostro-2">
+                <input type="search" id="url-imagen-2-rostro" placeholder="URL de la imagen"> <br>
+                <nav class="botones-objetos">
+                    <button id="enviar-rostro-2">Enviar</button>
+                    <button id="eliminar-rostro-2">Eliminar</button>
+                </nav>
+
+                <nav>
+                    <p id="resultado-rostro-2"></p>
+                </nav>
+            </nav>
+
+            <nav class="rostros-contenedor">
+                <nav id="padre-img-objeto-3">
+                    <canvas id="canvas-3" class="imagen"></canvas>
+                </nav>
+                <input type="file" id="img-rostro-3">
+                <input type="search" id="url-imagen-3-rostro" placeholder="URL de la imagen"> <br>
+                <nav class="botones-objetos">
+                    <button id="enviar-rostro-3">Enviar</button>
+                    <button id="eliminar-rostro-3">Eliminar</button>
+                </nav>
+
+                <nav>
+                    <p id="resultado-rostro-3"></p>
+                </nav>
+            </nav>
+        </section>
+        
+    </section>
 
 
     <script src="./scrip.js"></script>
-    <script src="/js.js"></script>
+    <script src="/objetos.js"></script>
+    <script src="/rostros.js"></script>
 </body>
 </html>

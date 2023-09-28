@@ -109,10 +109,15 @@ document.getElementById('enviar-objeto-2').addEventListener('click', function() 
             api.onreadystatechange = function () {
                 if (api.readyState === 4 && api.status === 200) {
                     var respuestaJson = JSON.parse(api.responseText);
-                    var prediccion = respuestaJson.predictions[0];
-                    var probabilidad = Math.round(prediccion.probability * 100);
+                    var maxPrediccion = respuestaJson.predictions[0];
+                    for (var i = 1; i < respuestaJson.predictions.length; i++) {
+                        if (respuestaJson.predictions[i].probability > maxPrediccion.probability) {
+                            maxPrediccion = respuestaJson.predictions[i];
+                        }
+                    }
+                    var probabilidad = Math.round(maxPrediccion.probability * 100);
                     if (probabilidad > 70) {
-                        document.getElementById('resultado-objeto-2').innerText = 'Clase: ' + prediccion.tagName + ', Probabilidad: ' + probabilidad+ '%';
+                        document.getElementById('resultado-objeto-2').innerText = 'Clase: ' + maxPrediccion.tagName + ', Probabilidad: ' + probabilidad+ '%';
                     }
                 }
                 console.log(respuestaJson)

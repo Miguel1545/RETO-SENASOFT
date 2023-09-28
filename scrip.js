@@ -93,3 +93,31 @@ document.getElementById('boton-enviar').addEventListener('click', function() { /
 });
 
 
+document.getElementById('boton-enviar').addEventListener('click', function() {
+    var textoEntrada = document.getElementById('entrada-texto').value;
+    var apiKey = 'd8f9f20a-164b-4da9-ade3-856c909abd77';
+    var fetchOptions = {
+        method: 'POST',
+        headers: {
+            'Ocp-Apim-Subscription-Key': apiKey,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify([{'Text': textoEntrada}])
+    };
+    fetch('https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=es&to=en', fetchOptions)
+        .then(response => response.json())
+        .then(data => {
+            var textoTraducido = data[0].translations[0].text;
+            fetch('https://eastus.api.cognitive.microsoft.com/sts/v1.0/issuetoken', fetchOptions)
+                .then(response => response.text())
+                .then(token => {
+                    var ssml = `<speak version='1.0' xml:lang='en-US'><voice xml:lang='en-US' xml:gender='Female' name='Microsoft Server Speech Text to Speech Voice (en-US, JessaRUS)'>${textoTraducido}</voice></speak>`;
+                    var audio = document.getElementById('audio');
+                    audio.src = `https://eastus.tts.speech.microsoft.com/cognitiveservices/v1?riffId=audio-16khz-128kbitrate-mono-mp3&Authorization=${token}&X-Microsoft-OutputFormat=audio-16khz-128kbitrate-mono-mp3&text=${encodeURIComponent(ssml)}`;
+                    audio.play();
+                })
+                .catch(error => console.error('Error:', error));
+        })
+        .catch(error => console.error('Error:', error));
+});

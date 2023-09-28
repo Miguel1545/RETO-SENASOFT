@@ -115,7 +115,7 @@ header {
     width: 100%;
     height: 100%;
 }
-#boton-enviar {
+#boton-enviar, #limpiar {
     height: 5vh;
     width: 40%;
     border-radius: 10px;
@@ -125,12 +125,7 @@ header {
     transition: 0.4s;
     box-shadow: 0 4px 16px rgb(73, 77, 78);
 }
-#limpiar {
-    height: 5vh;
-    width: 40%;
-    
-    border-radius:10px;
-}
+
 #limpiar:hover {
     background-color: #e74040;
     transition: 0.4s;
@@ -179,17 +174,32 @@ header {
     width: 45%;
 
 }
+#audio {
+    margin-top: 10px;
+}
+#entrada-texto {
+    height: 4vh;
+    width: 75%;
+    padding: 0 5px;
+}
+#salida-audio {
+    width: 75%;
+    margin: 40px auto;
+}
+.division {
+    display: flex;
+}.titulo-audio {
+    width: 100%;
+}
 .derecha-traduccion {
     width: 45%;
 }
 .padre-play {
-    width: 20%;
-    height: 8vh;    
+    width: 100%;
+    height: 10vh;    
 
 }
-.logo-play {    
-    width: 60%;
-}
+
 .img-play {
     width: 100%;
     height: 100%;
@@ -198,10 +208,12 @@ header {
     height: 5vh;
     width: 100%;
     border-radius: 10px;
+
 }
 .contenedor-boton-play {
-    display: flex;
     margin-top: 4%;
+    width: 15%;
+   
 } 
 #boton-play:hover {
     background-color: #5cb421;
@@ -223,7 +235,7 @@ header {
 .titulo-objetos {
     margin-top: 20px;
 }
-.contenedor {
+.contenedor, .rostros-contenedor {
     height: 70vh;
     width: 30%;
     border-top: 2px solid #333; 
@@ -233,28 +245,16 @@ header {
 
 
 }
-#img-1{
+#img-1, #img-2, #img-3, #img-rostro-1, #img-rostro-2, #img-rostro-3{
     margin-top: 20px;
-}
-#img-2{
-    margin-top: 20px;
-}
-#img-3{
-    margin-top: 20px;
-}
-#padre-img-objeto-1 {
+}   
+
+#padre-img-objeto-1, #padre-img-objeto-2, #padre-img-objeto-3, #padre-img-rostro-1, #padre-img-rostro-2, #padre-img-rostro-3 {
     width: 100%;
     height: 60%;
 }
-#padre-img-objeto-2 {
-    width: 100%;
-    height: 60%;
-}
-#padre-img-objeto-3 {
-    width: 100%;
-    height: 60%;
-}
-#url-imagen-1 {
+
+#url-imagen-1, #url-imagen-2, #url-imagen-3, #url-imagen-1-rostro, #url-imagen-2-rostro, #url-imagen-3-rostro {
     margin-top: 3%;
     opacity: 90%;
     padding: 0 4px;
@@ -262,81 +262,45 @@ header {
     width: 75%;
 
 }
-#url-imagen-2 {
-    margin-top: 3%;
-    opacity: 90%;
-    padding: 0 4px;
-    height: 3vh;
-    width: 75%;
-}
-#url-imagen-3 {
-    margin-top: 3%;
-    opacity: 90%;
-    padding: 0 4px;
-    height: 3vh;
-    width: 75%;
-}
+
 .imagen-objetos {
     width: 100%;
     height: 100%;
 }
-#eliminar-objeto-1 {
+#eliminar-objeto-1, #eliminar-objeto-2, #eliminar-objeto-3, #enviar-objeto-1, #enviar-objeto-2, #enviar-objeto-3, #eliminar-rostro-1, #eliminar-rostro-2, #eliminar-rostro-3, #enviar-rostro-1, #enviar-rostro-2, #enviar-rostro-3 {
     display: block;
     height: 5vh;
-    width: 20%;
+    width: 30%;
     margin: 0 auto;
-    margin-top: 10px;
     border-radius: 10px;
 }
-#eliminar-objeto-2 {
-    display: block;
-    margin: 0 auto;
-    height: 5vh;
-    border-radius: 10px;
-    width: 20%;
-    margin-top: 10px;
-}
-#eliminar-objeto-3 {
-    display: block;
-    margin: 0 auto;
-    height: 5vh;
-    width: 20%;
-    border-radius: 10px;
-    margin-top: 10px;
-}
-#eliminar-objeto-1:hover {
+
+#eliminar-objeto-1:hover, #eliminar-objeto-2:hover, #eliminar-objeto-3:hover, #eliminar-rostro-1:hover, #eliminar-rostro-2:hover, #eliminar-rostro-3:hover  {
     background-color: #e74040;
     transition: 0.4s;
     box-shadow: 0 4px 16px rgb(73, 77, 78);
 }
-#eliminar-objeto-2:hover {
-    background-color: #e74040;
-    transition: 0.4s;
-    box-shadow: 0 4px 16px rgb(73, 77, 78);
-}
-#eliminar-objeto-3:hover {
-    background-color: #e74040;
-    transition: 0.4s;
-    box-shadow: 0 4px 16px rgb(73, 77, 78);
-}
-#enviar-objeto-1, #enviar-objeto-2, #enviar-objeto-3 {
-    height: 5vh;
-    width: 20%;
-    border-radius: 10px;
-    margin-top: 10px;
-}
-#enviar-objeto-1:hover {
+
+#enviar-objeto-1:hover, #enviar-objeto-2:hover, #enviar-objeto-3:hover, #enviar-rostro-1:hover, #enviar-rostro-2:hover, #enviar-rostro-3:hover {
     background-color: #5cb421;
     transition: 0.4s;
     box-shadow: 0 4px 16px rgb(73, 77, 78);
 }
-#enviar-objeto-2:hover {
-    background-color: #5cb421;
-    transition: 0.4s;
-    box-shadow: 0 4px 16px rgb(73, 77, 78);
+
+.botones-objetos {
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+    margin: 10px auto;
 }
-#enviar-objeto-3:hover {
-    background-color: #5cb421;
-    transition: 0.4s;
-    box-shadow: 0 4px 16px rgb(73, 77, 78);
+.detector-rostros {
+    width: 90%;
+    height: 90vh;
+    background-color: #ffffff;
+    text-align: center;
+    margin-top: 20px;
+
+}
+.titulo-rostros {
+    display: block;
 }
